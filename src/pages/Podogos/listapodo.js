@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Text, StyleSheet, View, FlatList, Image, TouchableOpacity } from "react-native";
 import { SearchBar } from '@rneui/themed';
-import Icon from 'react-native-vector-icons/Ionicons';
+
+
+
 export default props => {
 
     const [podogos, setPodogos] = useState([])
     const [search, setSearch] = useState("")
 
     useEffect(() => {
-        fetch(`https://rosiecruz13.pythonanywhere.com/api/podologo/`)
+        fetch('https://rosiecruz13.pythonanywhere.com/api/podoguia/')
             .then(data => data.json())
             .then(json => setPodogos(json.results))
             .catch(error => console.warn(error))
@@ -18,17 +20,18 @@ export default props => {
     const updateSearch = (q) => {
         setSearch(q);
         if (search == "") {
-            fetch(`https://rosiecruz13.pythonanywhere.com/api/podologo/`)
+            fetch('https://rosiecruz13.pythonanywhere.com/api/podoguia/')
                 .then(data => data.json())
                 .then(json => setPodogos(json.results))
                 .catch(error => console.warn(error))
         } else {
-            fetch(`https://rosiecruz13.pythonanywhere.com/api/podologo?search=$(search)`)
+            fetch(`https://rosiecruz13.pythonanywhere.com/api/podoguia/?search=${search}`)
                 .then(data => data.json())
                 .then(json => setPodogos(json.results))
                 .catch(error => console.warn(error))
         }
     };
+
     const ProductCard = ({ item }) => {
         return (
             <TouchableOpacity onPress={() => { props.navigation.navigate('detalharpodo', { id: item.id }) }}>
@@ -46,13 +49,11 @@ export default props => {
     return (
         <View style={styles.container}>
             <SearchBar
-                
                 placeholder="Buscar podologo..."
                 onChangeText={updateSearch}
                 value={search}
                 platform="android"
             />
-            
             <FlatList
                 data={podogos}
                 style={styles.productList}
