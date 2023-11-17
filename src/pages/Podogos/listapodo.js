@@ -1,12 +1,31 @@
 import React, { useEffect, useState } from "react";
-import { Text, StyleSheet, View, FlatList, Image, TouchableOpacity } from "react-native";
+import { Text, StyleSheet, View, FlatList, Image, TouchableOpacity, Keyboard } from "react-native";
 import { SearchBar } from '@rneui/themed';
+import { Ionicons } from "@expo/vector-icons";
 
 export default props => {
 
     const [podogos, setPodogos] = useState([])
     const [search, setSearch] = useState("")
+    
+    const solicitar = async (search) =>{
+        Keyboard.dismiss()
 
+        try {
+          const resultados = await axios.get(`https://rosiecruz13.pythonanywhere.com/api/podoguia?search=$(search)`, {
+            params :{
+                q:search,
+                lang: "pt"
+            }
+          })
+            console.log(resultados)
+        } catch (error) {
+            console.log(resultados)
+
+        }
+        
+    } ; 
+    
     useEffect(() => {
         fetch(`https://rosiecruz13.pythonanywhere.com/api/podoguia/`)
             .then(data => data.json())
@@ -45,13 +64,26 @@ export default props => {
 
     return (
         <View style={styles.container}>
-            <SearchBar
+
+            <View style={styles.cabecalho}>
+                <Ionicons
+                    name="search"
+                    size={40}
+                    color="white"
+                    onPress={() => {solicitar(search)}}
+                />
+                <SearchBar
+                    style={styles.SearchBar}
+                    placeholder="Buscar podologo..."
+                    autoCapitalize="none"
+                    autoCorrect={false}
+                    // onChangeText={updateSearch}
+                    value={search}
+                    onChangeText={(value) => setSearch(value)}
                 
-                placeholder="Buscar podologo..."
-                onChangeText={updateSearch}
-                value={search}
-                platform="android"
-            />
+                />
+
+            </View>
             
             <FlatList
                 data={podogos}
@@ -69,6 +101,17 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#f7f7f7',
         paddingTop: 40,
+    },
+    cabecalho:{
+        flexDirection:"row",
+        justifyContent:"space-between",
+    },
+    SearchBar:{
+        flex:1,
+        backgroundColor:"white",
+        borderRadius: 23,
+        fontSize:20,
+        paddingHorizontal:20,
     },
     productList: {
         flex: 1,
