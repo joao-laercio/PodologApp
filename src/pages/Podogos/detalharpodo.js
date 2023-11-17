@@ -2,33 +2,33 @@ import React, { useState } from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity, Linking } from 'react-native';
 
 export default props => {
-    const [podologo, setPodogo] = useState({})
+    const [podoguia, setPodoguia] = useState({})
     const { id } = props.route.params
 
     fetch(`https://rosiecruz13.pythonanywhere.com/api/podoguia/${id}`)
         .then(data => data.json())
-        .then(json => setPodogo(json))
+        .then(json => setPodoguia(json))
         .catch(error => console.warn(error))
 
     return (
         <View style={styles.container}>
             <View style={styles.avatarContainer}>
                 <Image
-                    source={{ uri: podologo.avatar }}
+                    source={{ uri: podoguia.avatar }}
                     style={styles.avatar} />
-                <Text style={styles.name}>{podologo.nome}</Text>
+                <Text style={styles.name}>{podoguia.nome}</Text>
             </View>
             <View style={styles.infoContainer}>
                 <Text style={styles.infoLabel}>Email:</Text>
-                <Text style={styles.infoValue}>{podologo.email}</Text>
+                <Text style={styles.infoValue}>{podoguia.email}</Text>
             </View>
             <View style={styles.infoContainer}>
                 <Text style={styles.infoLabel}>Endereco:</Text>
-                <Text style={styles.infoValue}>{podologo.endereco}</Text>
+                <Text style={styles.infoValue}>{podoguia.endereco}</Text>
             </View>
             <View style={styles.infoContainer}>
                 <Text style={styles.infoLabel}>Bio:</Text>
-                <Text style={styles.infoValue}>{podologo.info}</Text>
+                <Text style={styles.infoValue}>{podoguia.info}</Text>
             </View>
             <View style={styles.containerFom}>
                 <TouchableOpacity style={styles.button} onPress={() => Linking.openURL( 'https://wa.me/${podologo.whatsapp}') }>
