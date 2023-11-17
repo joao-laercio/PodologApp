@@ -1,8 +1,18 @@
+<<<<<<< HEAD
 import React, { useEffect, useState } from "react";
 import { Text, StyleSheet, View, FlatList, Image, TouchableOpacity, Keyboard } from "react-native";
+=======
+import React, { useState, useEffect } from "react";
+import { Text, StyleSheet, View, FlatList, Image, TouchableOpacity } from "react-native";
+>>>>>>> e40d6bc1b3225cbc588e01c4a35d353a4516289e
 import { SearchBar } from '@rneui/themed';
 import { Ionicons } from "@expo/vector-icons";
 
+<<<<<<< HEAD
+
+
+=======
+>>>>>>> db5b7a5aa2e072e2ac6d8ce3b7f8a8f8c99093ad
 export default props => {
 
     const [podogos, setPodogos] = useState([])
@@ -27,7 +37,11 @@ export default props => {
     } ; 
     
     useEffect(() => {
+<<<<<<< HEAD
+        fetch('https://rosiecruz13.pythonanywhere.com/api/podoguia/')
+=======
         fetch(`https://rosiecruz13.pythonanywhere.com/api/podoguia/`)
+>>>>>>> db5b7a5aa2e072e2ac6d8ce3b7f8a8f8c99093ad
             .then(data => data.json())
             .then(json => setPodogos(json.results))
             .catch(error => console.warn(error))
@@ -37,17 +51,26 @@ export default props => {
     const updateSearch = (q) => {
         setSearch(q);
         if (search == "") {
+<<<<<<< HEAD
+            fetch('https://rosiecruz13.pythonanywhere.com/api/podoguia/')
+=======
             fetch(`https://rosiecruz13.pythonanywhere.com/api/podoguia/`)
+>>>>>>> db5b7a5aa2e072e2ac6d8ce3b7f8a8f8c99093ad
                 .then(data => data.json())
                 .then(json => setPodogos(json.results))
                 .catch(error => console.warn(error))
         } else {
+<<<<<<< HEAD
+            fetch(`https://rosiecruz13.pythonanywhere.com/api/podoguia/?search=${search}`)
+=======
             fetch(`https://rosiecruz13.pythonanywhere.com/api/podoguia?search=$(search)`)
+>>>>>>> db5b7a5aa2e072e2ac6d8ce3b7f8a8f8c99093ad
                 .then(data => data.json())
                 .then(json => setPodogos(json.results))
                 .catch(error => console.warn(error))
         }
     };
+
     const ProductCard = ({ item }) => {
         return (
             <TouchableOpacity onPress={() => { props.navigation.navigate('detalharpodo', { id: item.id }) }}>
@@ -64,6 +87,7 @@ export default props => {
 
     return (
         <View style={styles.container}>
+<<<<<<< HEAD
 
             <View style={styles.cabecalho}>
                 <Ionicons
@@ -85,6 +109,14 @@ export default props => {
 
             </View>
             
+=======
+            <SearchBar
+                placeholder="Buscar podologo..."
+                onChangeText={updateSearch}
+                value={search}
+                platform="android"
+            />
+>>>>>>> e40d6bc1b3225cbc588e01c4a35d353a4516289e
             <FlatList
                 data={podogos}
                 style={styles.productList}
