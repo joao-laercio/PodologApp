@@ -34,8 +34,6 @@ export default props => {
 
             fetch(`https://rosiecruz13.pythonanywhere.com/api/podoguia/?search=${search}`)
 
-            fetch(`https://rosiecruz13.pythonanywhere.com/api/podoguia?search=$(search)`)
-
                 .then(data => data.json())
                 .then(json => setPodogos(json.results))
                 .catch(error => console.warn(error))
