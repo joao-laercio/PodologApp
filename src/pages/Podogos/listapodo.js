@@ -2,22 +2,17 @@ import React, { useState, useEffect } from "react";
 import { Text, StyleSheet, View, FlatList, Image, TouchableOpacity } from "react-native";
 import { SearchBar } from '@rneui/themed';
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> db5b7a5aa2e072e2ac6d8ce3b7f8a8f8c99093ad
 export default props => {
 
     const [podogos, setPodogos] = useState([])
     const [search, setSearch] = useState("")
 
     useEffect(() => {
-<<<<<<< HEAD
+
         fetch('https://rosiecruz13.pythonanywhere.com/api/podoguia/')
-=======
+
         fetch(`https://rosiecruz13.pythonanywhere.com/api/podoguia/`)
->>>>>>> db5b7a5aa2e072e2ac6d8ce3b7f8a8f8c99093ad
+
             .then(data => data.json())
             .then(json => setPodogos(json.results))
             .catch(error => console.warn(error))
@@ -27,20 +22,20 @@ export default props => {
     const updateSearch = (q) => {
         setSearch(q);
         if (search == "") {
-<<<<<<< HEAD
+
             fetch('https://rosiecruz13.pythonanywhere.com/api/podoguia/')
-=======
+
             fetch(`https://rosiecruz13.pythonanywhere.com/api/podoguia/`)
->>>>>>> db5b7a5aa2e072e2ac6d8ce3b7f8a8f8c99093ad
+
                 .then(data => data.json())
                 .then(json => setPodogos(json.results))
                 .catch(error => console.warn(error))
         } else {
-<<<<<<< HEAD
+
             fetch(`https://rosiecruz13.pythonanywhere.com/api/podoguia/?search=${search}`)
-=======
+
             fetch(`https://rosiecruz13.pythonanywhere.com/api/podoguia?search=$(search)`)
->>>>>>> db5b7a5aa2e072e2ac6d8ce3b7f8a8f8c99093ad
+
                 .then(data => data.json())
                 .then(json => setPodogos(json.results))
                 .catch(error => console.warn(error))
