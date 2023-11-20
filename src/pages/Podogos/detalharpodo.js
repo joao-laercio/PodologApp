@@ -31,7 +31,7 @@ export default props => {
                 <Text style={styles.infoValue}>{podoguia.info}</Text>
             </View>
             <View style={styles.containerFom}>
-                <TouchableOpacity style={styles.button} onPress={() => Linking.openURL( 'https://wa.me/${podoguia.whatsapp}') }>
+                <TouchableOpacity style={styles.button} onPress={() => Linking.openURL( `https://wa.me/${podoguia.whatsapp}`) }>
                     <Text style={styles.buttonText}>Agendar</Text>
                 </TouchableOpacity>
             </View>
