@@ -1,12 +1,36 @@
+<<<<<<< HEAD
+import React, { useEffect, useState } from "react";
+import { Text, StyleSheet, View, FlatList, Image, TouchableOpacity, Keyboard } from "react-native";
+=======
 import React, { useState, useEffect } from "react";
 import { Text, StyleSheet, View, FlatList, Image, TouchableOpacity } from "react-native";
+>>>>>>> e40d6bc1b3225cbc588e01c4a35d353a4516289e
 import { SearchBar } from '@rneui/themed';
+import { Ionicons } from "@expo/vector-icons";
 
 export default props => {
 
     const [podogos, setPodogos] = useState([])
     const [search, setSearch] = useState("")
+    
+    const solicitar = async (search) =>{
+        Keyboard.dismiss()
 
+        try {
+          const resultados = await axios.get(`https://rosiecruz13.pythonanywhere.com/api/podoguia?search=$(search)`, {
+            params :{
+                q:search,
+                lang: "pt"
+            }
+          })
+            console.log(resultados)
+        } catch (error) {
+            console.log(resultados)
+
+        }
+        
+    } ; 
+    
     useEffect(() => {
 
         fetch('https://rosiecruz13.pythonanywhere.com/api/podoguia/')
@@ -58,12 +82,36 @@ export default props => {
 
     return (
         <View style={styles.container}>
+<<<<<<< HEAD
+
+            <View style={styles.cabecalho}>
+                <Ionicons
+                    name="search"
+                    size={40}
+                    color="white"
+                    onPress={() => {solicitar(search)}}
+                />
+                <SearchBar
+                    style={styles.SearchBar}
+                    placeholder="Buscar podologo..."
+                    autoCapitalize="none"
+                    autoCorrect={false}
+                    // onChangeText={updateSearch}
+                    value={search}
+                    onChangeText={(value) => setSearch(value)}
+                
+                />
+
+            </View>
+            
+=======
             <SearchBar
                 placeholder="Buscar podologo..."
                 onChangeText={updateSearch}
                 value={search}
                 platform="android"
             />
+>>>>>>> e40d6bc1b3225cbc588e01c4a35d353a4516289e
             <FlatList
                 data={podogos}
                 style={styles.productList}
@@ -80,6 +128,17 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#f7f7f7',
         paddingTop: 40,
+    },
+    cabecalho:{
+        flexDirection:"row",
+        justifyContent:"space-between",
+    },
+    SearchBar:{
+        flex:1,
+        backgroundColor:"white",
+        borderRadius: 23,
+        fontSize:20,
+        paddingHorizontal:20,
     },
     productList: {
         flex: 1,
